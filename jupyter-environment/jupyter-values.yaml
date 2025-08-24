@@ -1,0 +1,20 @@
+hub:
+  service:
+    type: LoadBalancer
+  config:
+    Authenticator:
+      admin_users:
+        - admin
+    DummyAuthenticator:
+      password: jupyter
+
+proxy:
+  secretToken: "your-secret-token-here"
+
+singleuser:
+  image:
+    name: jupyter/datascience-notebook
+    tag: latest
+  defaultUrl: "/lab"
+  storage:
+    capacity: 10Gi

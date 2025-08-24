@@ -1,0 +1,76 @@
+# Helm
+charts/
+Chart.lock
+
+# Kubernetes secrets and sensitive files
+*secret*
+*Secret*
+*SECRET*
+
+# Local values files that might contain secrets
+values-local.yaml
+values-prod.yaml
+values-dev.yaml
+values-staging.yaml
+*-secrets.yaml
+
+# Backup files
+*.bak
+*.backup
+*.orig
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+.env
+
+# Local Helm cache
+.helm/
+
+# Terraform (if used for infrastructure)
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# kubectl config (if accidentally added)
+kubeconfig
+*.kubeconfig
+
+# Local development overrides
+docker-compose.override.yml
