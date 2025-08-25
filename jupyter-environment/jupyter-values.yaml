@@ -1,20 +1,46 @@
+# ---- Auth: single user via DummyAuthenticator (shared password) ----
 hub:
-  service:
-    type: LoadBalancer
   config:
+    JupyterHub:
+      authenticator_class: dummy
     Authenticator:
+      # allow exactly one login name; replace with your desired username
+      allowed_users:
+        - xhesi
       admin_users:
-        - admin
+        - xhesi
     DummyAuthenticator:
-      password: jupyter
+      # set a shared login password for the hub (change this!)
+      password: "CHANGE_ME"
 
-proxy:
-  secretToken: "your-secret-token-here"
-
+# ---- Single-user server image (JupyterLab enabled by default) ----
 singleuser:
   image:
-    name: jupyter/datascience-notebook
+    # Any Jupyter Docker Stacks image works; minimal-notebook is small
+    name: jupyter/minimal-notebook
     tag: latest
-  defaultUrl: "/lab"
+  defaultUrl: /lab
   storage:
-    capacity: 10Gi
+    type: dynamic
+    capacity: 10Gi   # adjust as you like
+  cpu:
+    limit: 2
+    guarantee: 0.25
+  memory:
+    limit: 4G
+    guarantee: 512M
+# ---- Ingress with your external-dns annotation ----
+ingress:
+  enabled: true
+  hosts:
+    - jupyter.k3.galanxhi.com
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: jupyter.k3.galanxhi.com
+  # Uncomment and adjust if you use cert-manager for HTTPS
+  # tls:
+  #   - hosts:
+  #       - jupyter.k3.galanxhi.com
+  #     secretName: jhub-tls
+
+# (Optional) Light resource caps for the single server
+
