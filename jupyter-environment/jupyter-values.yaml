@@ -29,6 +29,14 @@ singleuser:
   memory:
     limit: 4G
     guarantee: 512M
+
+# ---- Add External-DNS annotation to the proxy service ----
+proxy:
+  service:
+    type: LoadBalancer
+    annotations:
+      external-dns.alpha.kubernetes.io/hostname: jupyter.k3.galanxhi.com
+
 # ---- Ingress with your external-dns annotation ----
 ingress:
   enabled: true
