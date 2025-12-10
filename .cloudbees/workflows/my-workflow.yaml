@@ -1,24 +1,29 @@
 apiVersion: automation.cloudbees.io/v1alpha1
 kind: workflow
 name: My workflow
-
 on:
   push:
     branches:
-      - '**'
+      - "**"
   workflow_dispatch:
     inputs:
       environment:
-        description: "Deployment environment"
+        description: Deployment environment
         type: choice
-        options: ["dev", "staging", "prod"]
+        options:
+          - dev
+          - staging
+          - prod
         required: true
-
 jobs:
   build:
     steps:
       - name: Say hello
-        uses: docker://golang:1.20.3-alpine3.17
-        shell: sh
         run: |
           echo "hello world"
+        uses: docker://golang:1.20.3-alpine3.17
+        shell: sh
+      - name: hi
+        run: ls
+        uses: docker://python:3.12-slim
+        shell: sh
