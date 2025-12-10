@@ -18,6 +18,8 @@ on:
 jobs:
   build:
     steps:
+      - name: Checkout
+        uses: cloudbees-io/checkout@v1
       - name: Say hello
         run: |
           echo "hello world"
